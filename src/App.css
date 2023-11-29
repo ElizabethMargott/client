@@ -1,0 +1,113 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.hero {
+  max-height: calc(100vh - 190px); /* Ajusta el valor 100px según el tamaño total de tu Navbar y Footer */
+  overflow-y: auto; /* Añadir barra de desplazamiento vertical cuando sea necesario */
+}
+
+/* Estilos adicionales para el scrollbar, si es necesario */
+.hero::-webkit-scrollbar {
+  width: 8px;
+}
+
+.hero::-webkit-scrollbar-thumb {
+  background-color: #1976D2;
+  /* border-radius: 10px; */
+}
+
+.hero::-webkit-scrollbar-track {
+  background-color: #F0F0F0;
+  /* border-radius: 10px; */
+}
+
+
+
+.align-center {
+  display: flex;
+  align-items: center;
+}
+
+
+.brand-style {
+    font-weight: 500;          /* Hace el texto más grueso */
+    font-size: 1.3em;         /* Aumenta el tamaño del texto */
+    letter-spacing: 1px;      /* Espaciado entre letras */
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white; 
+  cursor: pointer; 
+  transition: transform 0.2s;
+}
+
+.icon-container:hover, .icon-container-navbar:hover {
+  transform: scale(1.05); 
+}
+
+.icon-label {
+  margin-top: 5px; 
+}
+
+.hero-card:hover {
+  transform: scale(1.01);
+}
+
+.hero-card {
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+
+/* Hero Component */
+
+.title-text {
+  max-width: 50%;
+}
+
+.description-text {
+  max-width: 75%;
+}
+
+.content-text {
+  max-width: 100%;
+}
+
+
+.truncate-text {
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-text::after {
+  content: "...";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, transparent, #1C1C1C 50%);
+  padding-left: 10px;
+}
+
+.fade-out {
+  position: relative;
+}
+
+.fade-out::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;  /* Ajusta según tus necesidades */
+  height: 100%;
+  background: linear-gradient(to left, #1C1C1C, transparent);
+}
