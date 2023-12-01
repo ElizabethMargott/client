@@ -19,7 +19,6 @@ export function NotesPage() {
         loadNotes();
     }, []);
 
-
     return (
         <div>
             <Hero notes={notes} />
