@@ -1,14 +1,15 @@
+/* eslint-disable no-undef */
 /* eslint-disable react-hooks/rules-of-hooks */
 import axios from 'axios';
 
-const BASE_URL = 'https://api-sxm-test.fly.dev/api/v1/notes';
+const BASE_URL = "https://note-nexus.up.railway.app/api/v1/notes";
 
 // Obtener el token JWT almacenado en el local storage (asumiendo que se guarda allí)
 const authToken = localStorage.getItem('token');
 
 export const getAllNotes = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}/current`, {
+        const response = await axios.get(`${BASE_URL}`, {
             headers: {
                 Authorization: `Bearer ${authToken}` // Usar el token JWT como "Bearer token"
             }
@@ -21,6 +22,20 @@ export const getAllNotes = async () => {
             return window.location.reload();
         }
         throw error; // Si no es un error 403, lanza el error para manejarlo más adelante
+    }
+}
+
+export const getNotesForKanban = async () => {
+    try {
+        const response = await axios.get(`${BASE_URL}/kanban`, {
+            headers: {
+                Authorization: `Bearer ${authToken}`
+            }
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        // ... manejar errores ...
     }
 }
 

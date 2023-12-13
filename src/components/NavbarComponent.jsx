@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getAvatarUrl } from '../api/users.api';  // Asegúrate de actualizar la ruta a tu archivo api.js
+import { getAvatarData } from '../api/users.api';
 import { Avatar } from "@mui/material";
 import {
   Search as SearchIcon,
@@ -9,15 +9,19 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export function NavbarComponent() {
-  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [avatarData, setAvatarData] = useState(null);
 
   useEffect(() => {
-    const fetchAvatarUrl = async () => {
-      const url = await getAvatarUrl();
-      setAvatarUrl(url);
-    };
-    fetchAvatarUrl();
-  }, []);
+    async function loadAvatar() {
+        try {
+            const data = await getAvatarData();
+            setAvatarData(data);
+        } catch (error) {
+            console.error('Error al obtener el avatar:', error);
+        }
+    }
+    loadAvatar();
+}, []);
 
   return (
     <Navbar
@@ -44,8 +48,8 @@ export function NavbarComponent() {
         </Nav.Link>
         <Nav.Link as={Link} to="/profile">
           <Avatar
-            alt="User Avatar"
-            src={avatarUrl}
+            src={URL.createObjectURL(new Blob([avatarData], { type: 'image/jpeg' }))}
+            alt="Avatar"
             style={{ marginRight: "10px" }}
           />
         </Nav.Link>

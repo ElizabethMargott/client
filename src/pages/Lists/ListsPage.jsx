@@ -34,7 +34,6 @@ export function ListsPage() {
                 to="/notes-create">
                 <AddIcon style={{ color: 'white', fontSize: '24px' }} />
             </Link>
-      <h1 style={styles.heading}>Lista de Notas</h1>
       <div style={styles.list}>
         {notes.map((note) => (
           <div key={note.id} style={styles.card}>
@@ -54,10 +53,6 @@ const styles = {
     color: 'white',
     padding: '20px',
     fontFamily: 'Arial, sans-serif',
-  },
-  heading: {
-    fontSize: '24px',
-    marginBottom: '20px',
   },
   list: {
     display: 'flex',

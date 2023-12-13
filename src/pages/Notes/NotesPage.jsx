@@ -22,6 +22,8 @@ export function NotesPage() {
     return (
         <div>
             <Hero notes={notes} />
+        <div>
+        </div>
             <Link
                 style={{
                     cursor: 'pointer',

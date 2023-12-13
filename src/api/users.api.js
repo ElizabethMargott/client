@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
-const BASE_URL = 'https://api-sxm-test.fly.dev/api/v1';
+const BASE_URL = "https://note-nexus.up.railway.app";
 
 // Obtener el token JWT almacenado en el local storage (asumiendo que se guarda allí)
 const getAuthToken = () => localStorage.getItem('token');
@@ -39,6 +40,7 @@ export const getCurrentUser = async () => {
                 Authorization: `Bearer ${getAuthToken()}`
             }
         });
+        // console.log(response.data);
         return response.data;
     } catch (error) {
         if (error.response && error.response.status === 500) {
@@ -51,24 +53,29 @@ export const getCurrentUser = async () => {
     }
 };
 
-export const getAvatarUrl = async () => {
+export const getAvatarData = async () => {
+    const user = await getCurrentUser();
+
     try {
-        const response = await axios.get(`${BASE_URL}/users/current/avatar`, {
+        const response = await axios.get(`${BASE_URL}/files/download/${user.avatarUrl}`, {
+            responseType: 'arraybuffer', // Indicamos que esperamos una respuesta en formato de array de bytes
             headers: {
                 Authorization: `Bearer ${getAuthToken()}`
             }
         });
-        return response.request.responseURL;
+        return response.data; // Devolvemos los datos binarios
     } catch (error) {
-        if (error.response && error.response.status === 500) {
+        if (error.response && error.response.status === 403) {
             localStorage.removeItem('token');
             sessionStorage.removeItem('token');
             return window.location.reload();
         }
-        console.error('Error fetching avatar URL:', error);
-        return null;
+        throw error;
     }
 };
+
+
+
 
 export const updateAvatar = async (file) => {
     const formData = new FormData();
