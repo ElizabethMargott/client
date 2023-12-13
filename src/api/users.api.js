@@ -53,26 +53,26 @@ export const getCurrentUser = async () => {
     }
 };
 
-export const getAvatarData = async () => {
-    const user = await getCurrentUser();
+// export const getAvatarData = async () => {
+//     const user = await getCurrentUser();
 
-    try {
-        const response = await axios.get(`${BASE_URL}/files/download/${user.avatarUrl}`, {
-            responseType: 'arraybuffer', // Indicamos que esperamos una respuesta en formato de array de bytes
-            headers: {
-                Authorization: `Bearer ${getAuthToken()}`
-            }
-        });
-        return response.data; // Devolvemos los datos binarios
-    } catch (error) {
-        if (error.response && error.response.status === 403) {
-            localStorage.removeItem('token');
-            sessionStorage.removeItem('token');
-            return window.location.reload();
-        }
-        throw error;
-    }
-};
+//     try {
+//         const response = await axios.get(`${BASE_URL}/files/download/${user.avatarUrl}`, {
+//             responseType: 'arraybuffer', // Indicamos que esperamos una respuesta en formato de array de bytes
+//             headers: {
+//                 Authorization: `Bearer ${getAuthToken()}`
+//             }
+//         });
+//         return response.data; // Devolvemos los datos binarios
+//     } catch (error) {
+//         if (error.response && error.response.status === 403) {
+//             localStorage.removeItem('token');
+//             sessionStorage.removeItem('token');
+//             return window.location.reload();
+//         }
+//         throw error;
+//     }
+// };
 
 
 

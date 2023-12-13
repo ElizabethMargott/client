@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { getAvatarData } from '../api/users.api';
-import { Avatar } from "@mui/material";
+// import { useState, useEffect } from 'react';
+// import { getAvatarData } from '../api/users.api';
+// import { Avatar } from "@mui/material";
 import {
   Search as SearchIcon,
   ViewModule as ViewModuleIcon,
@@ -9,19 +9,19 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export function NavbarComponent() {
-  const [avatarData, setAvatarData] = useState(null);
+//   const [avatarData, setAvatarData] = useState(null);
 
-  useEffect(() => {
-    async function loadAvatar() {
-        try {
-            const data = await getAvatarData();
-            setAvatarData(data);
-        } catch (error) {
-            console.error('Error al obtener el avatar:', error);
-        }
-    }
-    loadAvatar();
-}, []);
+//   useEffect(() => {
+//     async function loadAvatar() {
+//         try {
+//             const data = await getAvatarData();
+//             setAvatarData(data);
+//         } catch (error) {
+//             console.error('Error al obtener el avatar:', error);
+//         }
+//     }
+//     loadAvatar();
+// }, []);
 
   return (
     <Navbar
@@ -47,11 +47,11 @@ export function NavbarComponent() {
           <SearchIcon fontSize="large" />
         </Nav.Link>
         <Nav.Link as={Link} to="/profile">
-          <Avatar
+          {/* <Avatar
             src={URL.createObjectURL(new Blob([avatarData], { type: 'image/jpeg' }))}
             alt="Avatar"
             style={{ marginRight: "10px" }}
-          />
+          /> */}
         </Nav.Link>
       </Nav>
     </Navbar>
