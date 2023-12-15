@@ -43,12 +43,12 @@ export const getCurrentUser = async () => {
         // console.log(response.data);
         return response.data;
     } catch (error) {
-        if (error.response && error.response.status === 500) {
-            localStorage.removeItem('token');
-            sessionStorage.removeItem('token');
-            return window.location.reload();
-        }
-        console.error('Error fetching user:', error);
+        // if (error.response && error.response.status === 500) {
+        //     localStorage.removeItem('token');
+        //     sessionStorage.removeItem('token');
+        //     return window.location.reload();
+        // }
+        // console.error('Error fetching user:', error);
         return null;
     }
 };
@@ -65,12 +65,12 @@ export const getAvatarData = async () => {
         });
         return response.data; // Devolvemos los datos binarios
     } catch (error) {
-        if (error.response && error.response.status === 403) {
-            localStorage.removeItem('token');
-            sessionStorage.removeItem('token');
-            return window.location.reload();
-        }
-        throw error;
+        // if (error.response && error.response.status === 403) {
+        //     localStorage.removeItem('token');
+        //     sessionStorage.removeItem('token');
+        //     return window.location.reload();
+        // }
+        // throw error;
     }
 };
 
