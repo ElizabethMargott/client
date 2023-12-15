@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import KanbanColumn from './KanbanColumn';
+import Modal from './Modal';
 import kanbanApi from '../api/kanban.api';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { getNotesForKanban } from '../api/notes.api';
 
 const KanbanBoard = () => {
     const [columns, setColumns] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+  const [activeColumnId, setActiveColumnId] = useState(null);
+  const [newNoteTitle, setNewNoteTitle] = useState('');
   
     useEffect(() => {
         const fetchData = async () => {
@@ -25,6 +29,23 @@ const KanbanBoard = () => {
         fetchData();
       }, []);
       
+      const handleAddClick = (columnId) => {
+        setActiveColumnId(columnId);
+        setShowModal(true); // Muestra el modal o el input para añadir una nueva nota
+      };
+    
+      const handleSaveNote = async () => {
+        try {
+          const noteData = { title: newNoteTitle, kanbanColumnId: activeColumnId };
+          await kanbanApi.createNote(noteData);
+          // Actualiza el estado con la nueva nota, puedes necesitar hacer un nuevo fetch o actualizar el estado de las columnas
+          setShowModal(false); // Cierra el modal después de guardar
+          setNewNoteTitle(''); // Limpia el input
+        } catch (error) {
+          console.error('Error creating note: ', error);
+        }
+      };
+
 
     const onDragEnd = async (result) => {
         const { source, destination, draggableId } = result;
@@ -67,15 +88,28 @@ const KanbanBoard = () => {
       
 
   return (
+    <>
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="container-fluid py-3">
         <div className="row g-3">
           {columns.map((column) => (
-            <KanbanColumn key={column.id} column={column} cards={column.cards} />
+            <KanbanColumn key={column.id} column={column} cards={column.cards}  onAddClick={handleAddClick} />
           ))}
         </div>
       </div>
     </DragDropContext>
+    {showModal && (
+      <Modal onClose={() => setShowModal(false)}>
+        {/* Puedes usar un input o un formulario aquí */}
+        <input
+          type="text"
+          value={newNoteTitle}
+          onChange={(e) => setNewNoteTitle(e.target.value)}
+        />
+        <button onClick={handleSaveNote}>Save</button>
+      </Modal>
+    )}
+    </>
   );
 };
 
