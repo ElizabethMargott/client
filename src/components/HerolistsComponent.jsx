@@ -2,7 +2,7 @@
 import { Container, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getTasksByTaskListId } from '../api/tasks.api';
+import { getTasksByTaskListId } from '../api/tasks.api';  
 
 export function HerolistsComponent({ tasklists }) {
     const navigate = useNavigate();
@@ -30,15 +30,15 @@ export function HerolistsComponent({ tasklists }) {
         <Container className="hero mt-3">
             {tasklists.map((tasklist) => (
                 <Card
-                className="hero-card mb-3"
-                key={tasklist.id}
-                style={{
-                    backgroundColor: "#1C1C1C",
-                    color: "#fff"
-                }} 
-                onClick={() => navigate(`/lists/${tasklist.id}`)}
-
-            >
+                    className="hero-card mb-3"
+                    key={tasklist.id}
+                    style={{
+                        backgroundColor: "#1C1C1C",
+                        color: "#fff"
+                    }}
+                    onClick={() => navigate(`/lists/${tasklist.id}`)}
+                    
+                >
                     <Card.Body style={{
                         display: 'flex',
                         flexDirection: 'row',
