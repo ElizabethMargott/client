@@ -8,7 +8,7 @@ export function HeroComponent({ notes }) {
     return (
         <Container className="hero mt-3">
             {notes.map((note) => (
-                <Card 
+                <Card
                     className="hero-card mb-3" 
                     key={note.id} 
                     style={{ 

@@ -1,49 +1,39 @@
 import { useEffect, useState } from 'react';
-import { getAllNotes } from '../../api/notes.api';
+import { getTaklists } from '../../api/tasklists.api';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
+import { HerolistsComponent } from '../../components/HerolistsComponent';
 
 export function ListsPage() {
-  const [notes, setNotes] = useState([]);
+  const [tasklists, setTasklists] = useState([]);
 
   useEffect(() => {
-    async function loadNotes() {
+    async function loadTasklists() {
       try {
-        const res = await getAllNotes();
-        setNotes(res.data);
+        const res = await getTaklists();
+        setTasklists(res.data);
       } catch (error) {
         console.error('Error al cargar las notas', error);
       }
     }
-    loadNotes();
+    loadTasklists();
   }, []);
 
   return (
-    <div style={styles.container}>
-            <Link
-                style={{
-                    cursor: 'pointer',
-                    position: 'fixed',
-                    bottom: '108px',
-                    right: '20px',
-                    backgroundColor: '#333',
-                    borderRadius: '50%',
-                    padding: '15px',
-                    boxShadow: '0px 2px 10px rgba(0,0,0,0.3)'
-                }}
-                to="/notes-create">
-                <AddIcon style={{ color: 'white', fontSize: '24px' }} />
-            </Link>
-      <div style={styles.list}>
-        {notes.map((note) => (
-          <div key={note.id} style={styles.card}>
-            <h3 style={styles.title}>{note.title}</h3>
-            <p style={styles.content}>{note.content}</p>
-            <p style={styles.description}>{note.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    <><HerolistsComponent tasklists={tasklists} /><Link
+      style={{
+        cursor: 'pointer',
+        position: 'fixed',
+        bottom: '108px',
+        right: '20px',
+        backgroundColor: '#333',
+        borderRadius: '50%',
+        padding: '15px',
+        boxShadow: '0px 2px 10px rgba(0,0,0,0.3)'
+      }}
+      to="/lists-create">
+      <AddIcon style={{ color: 'white', fontSize: '24px' }} />
+    </Link></>
     
   );
 }
