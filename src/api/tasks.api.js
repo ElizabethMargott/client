@@ -24,6 +24,7 @@ export const updateTaskCompletionStatus = async (taskId, isCompleted) => {
 };
 
 export const getTasksByTaskListId = async (taskListId) => {
+    // eslint-disable-next-line no-useless-catch
     try {
         const response = await axios.get(`${BASE_URL}?taskListId=${taskListId}`, {
             headers: {

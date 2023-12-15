@@ -57,7 +57,6 @@ export function ListsFormPage() {
       }
     });
   };
-
   const handleCheckboxChange = async (taskId) => {
     setCompletedTasks((prevCompletedTasks) => ({
       ...prevCompletedTasks,
@@ -71,8 +70,6 @@ export function ListsFormPage() {
       console.error('Error al actualizar el estado de la tarea', error);
     }
   };
-
-  
 
   return (
     <div className="container mt-5">
@@ -89,7 +86,6 @@ export function ListsFormPage() {
               {errors.title && <Form.Text className="text-danger">This field is required</Form.Text>}
             </Form.Group>
 
-            {/* Mostrar las tareas en el formulario */}
             <ul>
               {tasks.map((task) => (
                 <li key={task.id}>
