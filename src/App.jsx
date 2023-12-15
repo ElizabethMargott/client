@@ -14,6 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Toaster } from "react-hot-toast";
 import PropTypes from 'prop-types';
 import "./App.css";
+import { ListsFormPage } from "./pages/Lists/ListsFormPage";
 
 const isAuthenticated = () => {
   const token = localStorage.getItem("token");
@@ -75,15 +76,15 @@ function App() {
           />
           <Route
             path="/lists-create"
-            element={<PrivateRoute element={<ListsPage />} fallbackPath="/login" />}
+            element={<PrivateRoute element={<ListsFormPage />} fallbackPath="/login" />}
           />
           <Route
-            path="/lists-update"
-            element={<PrivateRoute element={<ListsPage />} fallbackPath="/login" />}
+            path="/lists/:id"
+            element={<PrivateRoute element={<ListsFormPage />} fallbackPath="/login" />}
           />
           <Route
             path="/lists-delete"
-            element={<PrivateRoute element={<ListsPage />} fallbackPath="/login" />}
+            element={<PrivateRoute element={<ListsFormPage />} fallbackPath="/login" />}
           />
           <Route
             path="/kanban"
