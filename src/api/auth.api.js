@@ -2,7 +2,7 @@
 /* eslint-disable no-useless-catch */
 import axios from 'axios';
 
-const BASE_URL = "https://note-nexus.up.railway.app";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "https://note-nexus.up.railway.app";
 
 export const login = async (username, password) => {
     // eslint-disable-next-line no-useless-catch

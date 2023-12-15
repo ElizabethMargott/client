@@ -1,13 +1,14 @@
 import axios from 'axios';
 
-const BASE_URL = "https://note-nexus.up.railway.app/api/v1/tasklists";
+// eslint-disable-next-line no-undef
+const BASE_URL = process.env.REACT_APP_BASE_URL || "https://note-nexus.up.railway.app";
 
 // Obtener el token JWT almacenado en el local storage (asumiendo que se guarda allí)
 const authToken = localStorage.getItem('token');
 
 export const getTaklists = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}`, {
+        const response = await axios.get(`${BASE_URL}/api/v1/tasklists`, {
             headers: {
                 Authorization: `Bearer ${authToken}` // Usar el token JWT como "Bearer token"
             }
@@ -27,7 +28,7 @@ export const getTaklists = async () => {
 
 export const getTasklist = (tasklistId) => {
     try {
-        const response = axios.get(`${BASE_URL}/${tasklistId}`, {
+        const response = axios.get(`${BASE_URL}/api/v1/tasklists/${tasklistId}`, {
             headers: {
                 Authorization: `Bearer ${authToken}` // Usar el token JWT como "Bearer token"
             }
@@ -48,7 +49,7 @@ export const getTasklist = (tasklistId) => {
 export const createlist = (tasklist) => {
     // eslint-disable-next-line no-useless-catch
     try {
-        const response = axios.post(`${BASE_URL}`, tasklist, {
+        const response = axios.post(`${BASE_URL}/api/v1/tasklists`, tasklist, {
             headers: {
                 Authorization: `Bearer ${authToken}`
             }
@@ -63,7 +64,7 @@ export const createlist = (tasklist) => {
 export const deletelists = (tasklistId) => {
     // eslint-disable-next-line no-useless-catch
     try {
-        axios.delete(`${BASE_URL}/${tasklistId}`, {
+        axios.delete(`${BASE_URL}/api/v1/tasklists/${tasklistId}`, {
             headers: {
                 Authorization: `Bearer ${authToken}`
             }
@@ -76,7 +77,7 @@ export const deletelists = (tasklistId) => {
 export const updatelists = (tasklistId, tasklist) => {
     // eslint-disable-next-line no-useless-catch
     try {
-        axios.put(`${BASE_URL}/${tasklistId}`, tasklist, {
+        axios.put(`${BASE_URL}/api/v1/tasklists/${tasklistId}`, tasklist, {
             headers: {
                 Authorization: `Bearer ${authToken}`
             }

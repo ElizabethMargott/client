@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const BASE_URL = "https://note-nexus.up.railway.app/api/v1/tasks";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "https://note-nexus.up.railway.app";
 
 const authToken = localStorage.getItem('token');
 
 export const updateTaskCompletionStatus = async (taskId, isCompleted) => {
   try {
     const response = await axios.patch(
-      `${BASE_URL}/${taskId}`,
+      `${BASE_URL}/api/v1/tasks/${taskId}`,
       { isCompleted },
       {
         headers: {
@@ -26,7 +26,7 @@ export const updateTaskCompletionStatus = async (taskId, isCompleted) => {
 export const getTasksByTaskListId = async (taskListId) => {
     // eslint-disable-next-line no-useless-catch
     try {
-        const response = await axios.get(`${BASE_URL}?taskListId=${taskListId}`, {
+        const response = await axios.get(`${BASE_URL}/api/v1/tasks?taskListId=${taskListId}`, {
             headers: {
                 Authorization: `Bearer ${authToken}`
             }

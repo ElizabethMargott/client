@@ -2,7 +2,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
-const BASE_URL = "https://note-nexus.up.railway.app";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "https://note-nexus.up.railway.app";
 
 // Obtener el token JWT almacenado en el local storage (asumiendo que se guarda allí)
 const getAuthToken = () => localStorage.getItem('token');
@@ -35,7 +35,7 @@ export const getUsernameFromToken = (token) => {
 
 export const getCurrentUser = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}/users/current`, {
+        const response = await axios.get(`${BASE_URL}/api/v1/users/current`, {
             headers: {
                 Authorization: `Bearer ${getAuthToken()}`
             }

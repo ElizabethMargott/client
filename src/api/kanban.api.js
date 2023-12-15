@@ -2,10 +2,10 @@
 /* eslint-disable no-useless-catch */
 import axios from 'axios';
 
-const API_BASE_URL = "https://note-nexus.up.railway.app/api/v1/kanban";
+const API_BASE_URL = process.env.REACT_APP_BASE_URL || "https://note-nexus.up.railway.app/api/v1/kanban";
 
 const apiClient = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: `${API_BASE_URL}/api/v1/kanban`,
   headers: {
     'Content-Type': 'application/json'
   }

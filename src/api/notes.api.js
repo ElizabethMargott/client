@@ -2,14 +2,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import axios from 'axios';
 
-const BASE_URL = "https://note-nexus.up.railway.app/api/v1/notes";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "https://note-nexus.up.railway.app";
 
 // Obtener el token JWT almacenado en el local storage (asumiendo que se guarda allí)
 const authToken = localStorage.getItem('token');
 
 export const getAllNotes = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}`, {
+        const response = await axios.get(`${BASE_URL}/api/v1/notes`, {
             headers: {
                 Authorization: `Bearer ${authToken}` // Usar el token JWT como "Bearer token"
             }
@@ -27,7 +27,7 @@ export const getAllNotes = async () => {
 
 export const getNotesForKanban = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}/kanban`, {
+        const response = await axios.get(`${BASE_URL}/api/v1/notes/kanban`, {
             headers: {
                 Authorization: `Bearer ${authToken}`
             }
@@ -41,7 +41,7 @@ export const getNotesForKanban = async () => {
 
 export const getNote = (noteId) => {
     try {
-        const response = axios.get(`${BASE_URL}/${noteId}`, {
+        const response = axios.get(`${BASE_URL}/api/v1/notes/${noteId}`, {
             headers: {
                 Authorization: `Bearer ${authToken}` // Usar el token JWT como "Bearer token"
             }
@@ -62,7 +62,7 @@ export const getNote = (noteId) => {
 export const createNote = (note) => {
     // eslint-disable-next-line no-useless-catch
     try {
-        const response = axios.post(`${BASE_URL}`, note, {
+        const response = axios.post(`${BASE_URL}/api/v1/notes`, note, {
             headers: {
                 Authorization: `Bearer ${authToken}`
             }
@@ -77,7 +77,7 @@ export const createNote = (note) => {
 export const deleteNote = (noteId) => {
     // eslint-disable-next-line no-useless-catch
     try {
-        axios.delete(`${BASE_URL}/${noteId}`, {
+        axios.delete(`${BASE_URL}/api/v1/notes/${noteId}`, {
             headers: {
                 Authorization: `Bearer ${authToken}`
             }
@@ -90,7 +90,7 @@ export const deleteNote = (noteId) => {
 export const updateNote = (noteId, note) => {
     // eslint-disable-next-line no-useless-catch
     try {
-        axios.put(`${BASE_URL}/${noteId}`, note, {
+        axios.put(`${BASE_URL}/api/v1/notes/${noteId}`, note, {
             headers: {
                 Authorization: `Bearer ${authToken}`
             }
