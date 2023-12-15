@@ -5,25 +5,24 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { getNotesForKanban } from '../api/notes.api';
 
 const KanbanBoard = () => {
-    const [columns, setColumns] = useState([]);
-  
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const cols = await kanbanApi.getAllColumns();
-            const notes = await getNotesForKanban();
-            const columnsWithNotes = cols.map(column => ({
-              ...column,
-              notes: notes.filter(note => note.kanbanColumnId === column.id)
-            }));
-            setColumns(columnsWithNotes);
-          } catch (error) {
-            console.error('Error fetching data: ', error);
-          }
-        };
-      
-        fetchData();
-      }, []);
+  const [columns, setColumns] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const cols = await kanbanApi.getAllColumns();
+        const notes = await getNotesForKanban(); // Esta función debe devolver las notas con `kanbanColumnId`
+        const columnsWithNotes = cols.map(column => ({
+          ...column,
+          notes: notes.filter(note => note.kanbanColumn === column.id)
+        }));
+        setColumns(columnsWithNotes);
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+      }
+    };
+    fetchData();
+  }, []);
       
 
     const onDragEnd = async (result) => {
